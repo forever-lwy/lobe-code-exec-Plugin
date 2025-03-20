@@ -11,17 +11,7 @@ export interface SearchItem {
 
 export type Result = CodeExecutionResult;
 
-interface bingResult {
-  // id: string;
-  
-  datePublished: string;
-  name: string;
-  // datePublishedDisplayText: string;
-  // isFamilyFriendly: boolean;
-  siteName: string;
-  snippet: string;
-  url: string;
-}
+
 export type bingResults = any; // 保留以兼容现有代码
 
 interface OrganicResult {
@@ -97,7 +87,7 @@ interface DetectedExtensions {
 export interface CodeExecutionResult {
   logs: string;
   results: Array<{
-    text?: string;
     png?: string;
+    text?: string;
   }>;
 }

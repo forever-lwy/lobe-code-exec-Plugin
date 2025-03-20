@@ -33,8 +33,8 @@ const executeCode = async (args: { code: string; language?: string }, settings: 
     const result = {
       logs: execution.logs || '',
       results: execution.results?.map(item => ({
-        text: item.text,
         png: item.png,
+        text: item.text,
       })) || [],
     };
     

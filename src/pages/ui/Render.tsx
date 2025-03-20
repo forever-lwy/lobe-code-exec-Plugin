@@ -8,7 +8,7 @@ const { Text, Paragraph } = Typography;
 const Render = memo(() => {
   const { data } = useWatchPluginMessage();
   
-  if (!data) return null;
+  if (!data) return undefined;
   
   return (
     <div>

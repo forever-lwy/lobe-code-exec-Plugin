@@ -4,11 +4,11 @@ export interface Settings {
 }
 
 export interface CodeExecutionResult {
-  logs: string;
   error?: string;
+  logs: string;
   results: Array<{
-    text?: string;
     png?: string; // base64编码的图片，用于展示matplotlib等生成的图表
+    text?: string;
   }>;
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const Render = () => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<any>(undefined);
 
   useEffect(() => {
     // 使用 fetch 请求加载 public/index.json 文件
