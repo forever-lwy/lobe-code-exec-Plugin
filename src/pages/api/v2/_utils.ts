@@ -1,6 +1,6 @@
 import { Sandbox } from '@e2b/code-interpreter';
 
-import { Result } from './type';
+import { Result } from './_types';
 import { Settings } from './_types';
 
 const executeCode = async (args: { code: string; language?: string }, settings: Settings): Promise<Result> => {
@@ -31,7 +31,7 @@ const executeCode = async (args: { code: string; language?: string }, settings: 
     
     // 处理结果
     const result = {
-      logs: execution.logs || '',
+      logs: String(execution.logs || ''), // 将 Logs 类型转换为 string 类型
       results: execution.results?.map(item => ({
         png: item.png,
         text: item.text,
