@@ -5,7 +5,7 @@ import {
 } from '@lobehub/chat-plugin-sdk';
 
 import { Settings } from './_types';
-import runner from './_utils';
+import executeCode from './_utils';
 
 export const config = {
   runtime: 'edge',
@@ -23,7 +23,7 @@ export default async (req: Request) => {
 
   try {
     const args = await req.json();
-    const result = await runner(args, settings);
+    const result = await executeCode(args, settings);
     return new Response(JSON.stringify(result));
   } catch (error) {
     return createErrorResponse(PluginErrorType.PluginServerError, error as object);

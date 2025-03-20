@@ -1,58 +1,53 @@
 import { useWatchPluginMessage } from '@lobehub/chat-plugin-sdk/client';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
-import { Card,Flex} from "antd";
+import { Card, Flex, Typography, Image } from "antd";
 
+const { Text, Paragraph } = Typography;
 
 const Render = memo(() => {
   const { data } = useWatchPluginMessage();
- return (
+  
+  if (!data) return null;
+  
+  return (
     <div>
-      {/* Flexbox for displaying cards in rows */}
-      {Array.isArray(data) && (
-        <Flex  gap={12} justify='space-between' wrap="wrap" >
-          {data.map((item, index) => (
-            <Flexbox flex={1}  justify='space-between' key={index} >
-              <Card
-                bordered={true}
-                style={{ height:"200px" }}
-                title={<div 
-                style={{
-                  WebkitBoxOrient: 'vertical',
-                  WebkitLineClamp: 1, // Limit to 3 lines
-                  color:"#1677FF",
-                  display: '-webkit-box',
-                  fontSize:'16px',
-                  marginTop:'4px',
-                  overflow: 'hidden',
-                }}>
-                  <a href={item.link!}>{item.title}</a>
-                  </div>}
-              >
-                <a  href={item.link!} rel="noreferrer" target="_blank">
-                  <Flexbox distribution="space-between" flex={1} gap={5} >
-                    <Flexbox
-                      
-                      style={{
-                        WebkitBoxOrient: 'vertical',
-                        WebkitLineClamp: 3, // Limit to 3 lines
-                        color:"#adadad",
-                        display: '-webkit-box',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {item.content}
-                    </Flexbox>
-                    <Flexbox style={{color:"#c8c8c8"}}>
-                      {item.source ? `${item.source}` : `网络搜索结果`}
-                    </Flexbox>
-                  </Flexbox>
-                </a>
-              </Card>
-            </Flexbox>
-          ))}
-        </Flex>
-      )}
+      <Card title="代码执行结果" bordered>
+        {data.logs && (
+          <Flexbox gap={8}>
+            <Text strong>执行日志</Text>
+            <Paragraph>
+              <pre style={{ backgroundColor: '#f5f5f5', padding: 12, borderRadius: 4, overflow: 'auto' }}>
+                {data.logs}
+              </pre>
+            </Paragraph>
+          </Flexbox>
+        )}
+        
+        {data.results && data.results.length > 0 && (
+          <Flexbox gap={16} style={{ marginTop: 16 }}>
+            <Text strong>执行结果</Text>
+            <Flex wrap="wrap" gap={16}>
+              {data.results.map((item, index) => (
+                <Flexbox key={index} gap={8}>
+                  {item.text && (
+                    <pre style={{ backgroundColor: '#f5f5f5', padding: 12, borderRadius: 4, overflow: 'auto' }}>
+                      {item.text}
+                    </pre>
+                  )}
+                  {item.png && (
+                    <Image
+                      src={`data:image/png;base64,${item.png}`}
+                      alt={`Result chart ${index}`}
+                      style={{ maxWidth: '100%' }}
+                    />
+                  )}
+                </Flexbox>
+              ))}
+            </Flex>
+          </Flexbox>
+        )}
+      </Card>
     </div>
   );
 });

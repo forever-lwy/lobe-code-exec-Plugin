@@ -9,7 +9,7 @@ export interface SearchItem {
   title: string;
 }
 
-export type Result = SearchItem[];
+export type Result = CodeExecutionResult;
 
 interface bingResult {
   // id: string;
@@ -22,7 +22,7 @@ interface bingResult {
   snippet: string;
   url: string;
 }
-export type bingResults = bingResult[];
+export type bingResults = any; // 保留以兼容现有代码
 
 interface OrganicResult {
   about_page_link: string;
@@ -92,4 +92,12 @@ interface Top {
 
 interface DetectedExtensions {
   month_ago: number;
+}
+
+export interface CodeExecutionResult {
+  logs: string;
+  results: Array<{
+    text?: string;
+    png?: string;
+  }>;
 }

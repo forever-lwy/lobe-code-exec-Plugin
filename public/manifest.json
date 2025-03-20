@@ -2,48 +2,51 @@
   "$schema": "../node_modules/@lobehub/chat-plugin-sdk/schema.json",
   "api": [
     {
-      "name": "Bingsearch",
-      "url": "https://bingsearch-plugin.vercel.app/api/v2",
-      "description": "基于bing搜索引擎的互联网搜索",
+      "name": "CodeExecutor",
+      "url": "https://code-exec-plugin.vercel.app/api/v2",
+      "description": "执行Python代码并返回结果，支持数据分析和可视化",
       "parameters": {
         "properties": {
-          "query": {
-            "description": "搜索的文本内容",
+          "code": {
+            "description": "需要执行的代码",
             "type": "string"
+          },
+          "language": {
+            "description": "代码语言，默认为Python",
+            "type": "string",
+            "enum": ["python"]
           }
         },
-        "required": ["query"],
+        "required": ["code"],
         "type": "object"
       }
     }
   ],
   "settings": {
     "type": "object",
-    "required": ["BING_API_KEY"],
+    "required": ["E2B_API_KEY"],
     "properties": {
-      "BING_API_KEY": {
-        "title": "Bingsearch API Key",
-        "description": "we use [Bingsearch](https://www.microsoft.com/en-us/bing/apis) as backend service | 该插件使用 Bingsearchapi 作为搜索服务",
+      "E2B_API_KEY": {
+        "title": "E2B API Key",
+        "description": "该插件使用 E2B 作为代码执行环境, 需要提供 E2B API Key",
         "type": "string",
-        "minLength": 32,
-        "maxLength": 32,
         "format": "password"
       }
     }
   },
   "ui": {
-    "url": "https://bingsearch-plugin.vercel.app/ui",
-    "height": 400
+    "url": "https://code-exec-plugin.vercel.app/ui",
+    "height": 500
   },
   "author": "ZWL_FineHow",
   "createdAt": "2024-11-21",
-  "homepage": "https://github.com/FineHow/Bingsearch-Plugin",
-  "identifier": "Bingsea",
+  "homepage": "https://github.com/FineHow/CodeExec-Plugin",
+  "identifier": "CodeExec",
   "meta": {
-    "avatar": "🚀",
-    "tags": ["Bingsearch"],
-    "title": "Bing联网搜777索",
-    "description": "基于bing搜索引擎的互联网搜索助手"
+    "avatar": "💻",
+    "tags": ["Code", "Python", "Data Analysis"],
+    "title": "代码执行助手",
+    "description": "执行Python代码并返回结果，支持数据分析和可视化"
   },
   "version": "1"
 }
